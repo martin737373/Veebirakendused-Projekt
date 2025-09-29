@@ -6,43 +6,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Login</title>
-  <link rel="stylesheet" href="./style.css">
-  <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="../styles/style.css">
+  <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
   <div>
     <header>
-      <h1>Home</h1>
-      <div>
-        Icon
+      <div id="login-header-div">
+        <h1 id="login-title" class="login-highlight">Home</h1>
+        <div id="login-icon-div">
+          <i id="login-icon">
+            <img src="../assets/login-icon.svg" alt="Login Icon" width="64" height="64">
+          </i>
+        </div>
       </div>
     </header>
-    <hr>
-    <div>
-      <div>
-        Welcome to PostIt
-      </div>
-      <div>
-        Create an account
-      </div>
-      <div>
-        or
-      </div>
-      <div>
-        Please log in
-      </div>
-      <div>
-        Input fields
-      </div>
-      <div>
-        Log in button
-      </div>
-      <div>
-        Forget Password
+    <div id="login-container">
+      <div id="login-box">
+        <form id="login-form">
+          <p>Welcome to PostIt</p>
+          <p><a href="#" class="link">Create an account</a></p>
+          <p>or</p>
+          <p>Please log in</p>
+
+          <div class="form-fields">
+            <input type="text" id="login-username-input" name="username" placeholder="Username" required maxlength="65"
+              autocomplete="username" />
+
+            <input type="password" id="login-password-input" name="password" placeholder="Password" required
+              maxlength="65" autocomplete="current-password" />
+
+            <button type="submit">Log in</button>
+          </div>
+
+          <p><a href="#" class="link">Forgot Password</a></p>
+        </form>
       </div>
     </div>
   </div>
+  <script src="../js/main.js"></script>
 </body>
+
 
 </html>

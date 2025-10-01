@@ -1,0 +1,99 @@
+body {
+    height: 100%;
+    font-family: Georgia, serif;
+}
+
+#login-header-ref {
+    text-decoration: none;
+    color: #000000;
+}
+
+#login-header-div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #b5b5b5;
+    border-radius: 1rem;
+    padding: 0.5rem;
+}
+
+
+#login-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+#login-title:hover {
+    color: #3647c5;
+}
+
+#login-icon img {
+    width: 48px;
+    height: 48px;
+}
+
+#login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+#login-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #e2e2e2;
+    border-radius: 1rem;
+    padding: 1rem;
+    width: 300px;
+    min-width: 200px;
+    text-align: center;
+    border: 1px solid #ccc;
+}
+
+#login-welcome {
+    font-weight: 1000;
+    padding-bottom: 1rem;
+}
+
+#login-box p {
+    margin: 0.1rem 0;
+    font-size: 1.2rem;
+}
+
+#login-box input[type="text"],
+#login-box input[type="password"] {
+    width: 100px;
+    padding: 0.75rem 0.25rem;
+    margin: 0.25rem 0;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+}
+
+#login-box button {
+    background: #00356d;
+    color: #fff;
+    padding: 0.2rem;
+    width: 100px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin: 1rem 0;
+}
+
+
+.link {
+    color: #55cfee;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+#login-box input+button {
+    margin-top: 0.75rem;
+}
+
+#login-welcome~p {
+    font-size: 1.2rem;
+    color: #000000;
+}

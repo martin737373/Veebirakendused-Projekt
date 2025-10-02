@@ -6,9 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Login</title>
-  <base href="./">
-  <link rel="stylesheet" href="docs/styles/style.css">
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="styles/style.css">
+  <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -19,18 +18,18 @@
           <h1 id="login-title" class="login-highlight">Home</h1>
         </a>
         <div id="login-icon">
-          <img src="assets/login-icon.svg" alt="Login Icon">
+          <img src="../assets/login-icon.svg" alt="Login Icon">
         </div>
       </div>
     </header>
     <div id="login-container">
       <div id="login-box">
-        <form id="login-form" action="index.html" method="POST">
+        <form id="login-form" action="index.html" method="get">
           <p id="login-welcome">Welcome to PostIt</p>
-          <p><a href="docs/login.html" class="link">Create an account</a></p>
+          <p><a href="#" class="link">Create an account</a></p>
           <p>or</p>
           <p>Please log in</p>
-          <div class="login-form-fields">
+          <div class="form-fields">
             <div>
               <input type="text" id="login-username-input" name="username" placeholder="Email" required maxlength="65"
                 autocomplete="username" />
@@ -43,7 +42,7 @@
               <button type="submit">Log in</button>
             </div>
           </div>
-          <p><a href="docs/login.html" class="link">Forgot Password</a></p>
+          <p><a href="#" class="link">Forgot Password</a></p>
         </form>
       </div>
     </div>

@@ -192,17 +192,6 @@ main {
     right: 10px;
 }
 
-
-#login-header-div {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #b5b5b5;
-    border-radius: 1rem;
-    padding: 0.5rem;
-    margin: 1rem;
-}
-
 #login-container {
     display: flex;
     justify-content: center;
@@ -211,14 +200,14 @@ main {
 }
 
 #form-box {
-    display: flex;
+    display: inline-flex;
     flex-direction: column;
     align-items: center;
-    background: #e2e2e2;
+    background: #f0f0f0;
     border-radius: 1rem;
-    padding: 1rem;
-    width: 300px;
+    padding: 1rem 1.5rem;
     min-width: 200px;
+    max-width: 450px;
     text-align: center;
     border: 1px solid #ccc;
 }
@@ -240,16 +229,20 @@ main {
     margin: 0.25rem 0;
     border: 1px solid #ccc;
     font-size: 1rem;
+    width: 100%;
 }
 
 #form-box button {
     background: #00356d;
     color: #fff;
-    padding: 0.2rem;
-    width: 100px;
+    padding: 0.5rem;
     font-size: 1.2rem;
     cursor: pointer;
     margin: 1rem 0;
+    padding: 0.5rem 0;
+    border: none;
+    border-radius: 0.5rem;
+    width: 100%;
 }
 
 
@@ -267,4 +260,56 @@ main {
 #login-welcome~p {
     font-size: 1.2rem;
     color: #000000;
+}
+
+.form-fields>div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 0.5rem;
+}
+
+#post-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+}
+
+#post-textarea {
+    flex: 1;
+    resize: none;
+}
+
+#file-input {
+    display: none;
+}
+
+.file-btn {
+    background: #555;
+    color: #fff;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.file-btn:hover {
+    background: #333;
+}
+
+.form-fields label {
+    padding: 0.3rem 0.5rem;
+    font-size: 1.2rem;
+}
+
+.form-fields input[type="file"],
+.form-fields textarea,
+.form-fields input,
+.form-fields select {
+    padding: 0.3rem 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 0.3rem;
 }

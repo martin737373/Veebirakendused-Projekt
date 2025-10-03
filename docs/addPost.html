@@ -1,1 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>AddPost</title>
+	<link rel="stylesheet" href="styles/style.css">
+	<link rel="icon" href="assets/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+	<header class="header-container">
+		<ul class="nav">
+			<li><a href="index.html">Home</a></li>
+		</ul>
+		<a class="logo" href="#"><img src="assets/user.jpg" alt="Account"></a>
+	</header>
+
+	<div id="post-container">
+		<div id="form-box">
+			<form id="post-form" action="index.html" method="get">
+				<div class="form-fields">
+					<div>
+						<label>Post body</label>
+						<textarea id=post-textarea rows="5" cols="20" placeholder="Write a post" required></textarea>
+					</div>
+					<div>
+						<label>Select file</label>
+						<label for="file-input" class="file-btn">Choose file</label>
+						<input type="file" id="file-input" accept=".mkv,.mp4,.jpeg,.png">
+					</div>
+					<div>
+						<button type="submit">Create post</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</body>
+
+</html>

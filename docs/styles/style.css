@@ -313,3 +313,51 @@ main {
     border: 1px solid #ccc;
     border-radius: 0.3rem;
 }
+
+.profile-dropdown.active .dropdown-menu {
+    display: block;
+}
+
+.profile-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.profile-dropdown img {
+    width: 80px;
+    height: 80px;
+    border-radius: 30%;
+    object-fit: cover;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: #fff;
+    color: black;
+    padding: 10px;
+    border-radius: 15px;
+    border: 2px solid rgba(30, 40, 60, 0.5);
+    min-width: 180px;
+    text-align: left;
+}
+
+.logout-btn {
+    display: block;
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid rgb(0, 0, 0);
+    text-align: center;
+    color: rgba(30, 40, 60, 0.5);
+    text-decoration: none;
+    font-weight: bold;
+}

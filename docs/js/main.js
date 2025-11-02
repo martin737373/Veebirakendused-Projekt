@@ -66,4 +66,18 @@ async function createPosts(posts) {
 	});
 }
 
+document.addEventListener("click", e => {
+	const profileButton = document.querySelector("[dropdownButton]");
+	const dropdown = document.querySelector("[profileDropdown]");
+
+	if (e.target === profileButton || profileButton.contains(e.target)) {
+		dropdown.classList.toggle("active");
+		return;
+	}
+
+	if (!dropdown.contains(e.target)) {
+		dropdown.classList.remove("active");
+	}
+});
+
 fetch_posts();

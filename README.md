@@ -1,4 +1,6 @@
-# veebirakendused-projekt
+# Veebirakendused-projekt
+
+- Projekt aines Veebirakendused
 
 ## Project setup
 ```

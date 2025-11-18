@@ -7,41 +7,42 @@
   </header>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style scoped>
-
 .header-container {
+  align-items: center;
   background-color: rgba(30, 40, 60, 0.5);
-  z-index: 1000;
+  border-radius: 1rem;
   display: flex;
   justify-content: center;
-  border-radius: 1rem;
-  padding: 0.5rem;
   margin: 1rem;
+  padding: 0.5rem;
+  z-index: 1000;
 }
 
 .nav {
-  list-style: none;
   display: flex;
-  gap: 15px;
   flex-wrap: wrap;
+  gap: 15px;
+  list-style: none;
+  margin: 0;
   padding: 0;
 }
 
 .nav a {
+  border-radius: 5px;
+  color: #fff;
+  display: block;
+  font-size: 1.2em;
   padding: 8px 12px;
   text-align: center;
-  display: block;
-  color: white;
-  font-size: 1.2em;
   text-decoration: none;
-  transition: background 0.3s, color 0.3s;
-  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.nav a:hover {
+.nav a:hover,
+.nav a:focus-visible {
   background-color: bisque;
   color: #36abda;
 }

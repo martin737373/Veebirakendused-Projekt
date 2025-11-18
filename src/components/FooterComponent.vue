@@ -11,68 +11,53 @@
   </footer>
 </template>
 
-<script setup>
-</script>
+<script setup></script>
 
 <style scoped>
-
-.footer-container {
+.header-container {
+  align-items: center;
   background-color: rgba(30, 40, 60, 0.5);
-  z-index: 1000;
-  position: fixed;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
   border-radius: 1rem;
-  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
   margin: 1rem;
-  display: flex;
-  justify-content: center;
+  padding: 0.5rem;
+  z-index: 1000;
 }
 
-.footer-content {
+.nav {
   display: flex;
-  flex-direction: column;
-  align-items: center;  
-  justify-content: center;
-  gap: 5px;
-}
-
-.footer-nav {
-  list-style: none;
-  display: flex;
+  flex-wrap: wrap;
   gap: 15px;
-    flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
   padding: 0;
 }
 
-.footer-nav a {
+.nav a {
+  border-radius: 5px;
+  color: #fff;
+  display: block;
+  font-size: 1.2em;
   padding: 8px 12px;
-  color: white;
-  font-size: 1em;
+  text-align: center;
   text-decoration: none;
-  transition: background 0.3s, color 0.3s;
-  border-radius: 5px; 
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.footer-nav a:hover {
+.nav a:hover,
+.nav a:focus-visible {
   background-color: bisque;
   color: #36abda;
 }
 
-.footer-text {
-  color: white;
-  font-size: 0.9em;
-  text-align: center; 
-}
-
 @media (max-width: 1050px) {
-  .footer-container {
+  .header-container {
     flex-direction: column;
     gap: 10px;
   }
 
-  .footer-nav {
+  .nav {
     justify-content: center;
   }
 }

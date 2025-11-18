@@ -1,20 +1,15 @@
 <template>
-  <div class="main">
-    Home Page
-  </div>
+  <div class="main">Home Page</div>
 </template>
 
 <script>
 export default {
-  name: 'Main',
+  name: "MainComponent",
   props: {
-    msg: String
-  }
-}
+    msg: String,
+  },
+};
 </script>
 
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>
+<style scoped></style>

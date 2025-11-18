@@ -1,20 +1,15 @@
 <template>
-  <div class="login">
-    Login Page
-  </div>
+  <div class="login">Login Page</div>
 </template>
 
 <script>
 export default {
-  name: 'Login',
+  name: "LoginComponent",
   props: {
-    msg: String
-  }
-}
+    msg: String,
+  },
+};
 </script>
 
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>
+<style scoped></style>

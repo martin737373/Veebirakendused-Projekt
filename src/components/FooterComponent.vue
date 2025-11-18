@@ -14,50 +14,63 @@
 <script setup></script>
 
 <style scoped>
-.header-container {
-  align-items: center;
+.footer-container {
   background-color: rgba(30, 40, 60, 0.5);
+  z-index: 1000;
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
   border-radius: 1rem;
+  padding: 0.5rem;
+  margin: 1rem;
   display: flex;
   justify-content: center;
-  margin: 1rem;
-  padding: 0.5rem;
-  z-index: 1000;
 }
 
-.nav {
+.footer-content {
   display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.footer-nav {
   list-style: none;
-  margin: 0;
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
   padding: 0;
 }
 
-.nav a {
-  border-radius: 5px;
-  color: #fff;
-  display: block;
-  font-size: 1.2em;
+.footer-nav a {
   padding: 8px 12px;
-  text-align: center;
+  color: white;
+  font-size: 1em;
   text-decoration: none;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background 0.3s, color 0.3s;
+  border-radius: 5px;
 }
 
-.nav a:hover,
-.nav a:focus-visible {
+.footer-nav a:hover {
   background-color: bisque;
   color: #36abda;
 }
 
+.footer-text {
+  color: white;
+  font-size: 0.9em;
+  text-align: center;
+}
+
 @media (max-width: 1050px) {
-  .header-container {
+  .footer-container {
     flex-direction: column;
     gap: 10px;
   }
 
-  .nav {
+  .footer-nav {
     justify-content: center;
   }
 }

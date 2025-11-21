@@ -18,6 +18,15 @@ import FooterComponent from "@/components/FooterComponent.vue";
   color: #2c3e50;
 }
 
+html, body, #app {
+  margin: 0;            
+  padding: 0;           
+  width: 100%;          
+  min-height: 100vh;    
+  background-color: #1e283c; 
+  box-sizing: border-box;
+}
+
 nav {
   padding: 30px;
 }

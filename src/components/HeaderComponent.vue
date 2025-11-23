@@ -16,8 +16,10 @@
   border-radius: 1rem;
   display: flex;
   justify-content: center;
-  margin: 1rem;
-  padding: 0.5rem;
+  position: fixed;
+  top: 20px;
+  left: 1rem;
+  right: 1rem;
   z-index: 1000;
 }
 

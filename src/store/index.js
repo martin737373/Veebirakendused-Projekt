@@ -121,10 +121,18 @@ export default createStore({
         post.likes++;
       }
     },
+    resetAllLikes(state) {
+      state.posts.forEach((post) => {
+        post.likes = 0;
+      });
+    },
   },
   actions: {
     likePost({ commit }, postId) {
       commit("likePost", postId);
+    },
+    resetAllLikes({ commit }) {
+      commit("resetAllLikes");
     },
   },
   modules: {},

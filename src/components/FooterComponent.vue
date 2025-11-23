@@ -6,12 +6,22 @@
         <li><router-link to="#">Terms</router-link></li>
         <li><router-link to="#">About</router-link></li>
       </ul>
+      <button class="reset-button" @click="resetLikes">Reset Likes</button>
       <span class="footer-text">© 2025 MySite</span>
     </div>
   </footer>
 </template>
 
-<script setup></script>
+<script>
+export default {
+  name: "FooterComponent",
+  methods: {
+    resetLikes() {
+      this.$store.dispatch("resetAllLikes");
+    },
+  },
+};
+</script>
 
 <style scoped>
 .footer-container {
@@ -62,6 +72,21 @@
   color: white;
   font-size: 0.9em;
   text-align: center;
+}
+
+.reset-button {
+  padding: 8px 16px;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 0.9em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.reset-button:hover {
+  background-color: #c0392b;
 }
 
 @media (max-width: 1050px) {

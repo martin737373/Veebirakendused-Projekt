@@ -22,14 +22,15 @@ export default {
   background-color: rgba(30, 40, 60, 0.5);
   z-index: 1000;
   position: fixed;
-  bottom: 10px;
-  left: 10px;
-  right: 10px;
+  bottom: 0;
+  left: 1rem;
+  right: 1rem;
   border-radius: 1rem;
   padding: 0.5rem;
-  margin: 1rem;
+  margin: 0;
   display: flex;
   justify-content: center;
+  --footer-height: 55px;
 }
 
 .footer-content {
@@ -38,6 +39,7 @@ export default {
   align-items: center;
   justify-content: center;
   gap: 5px;
+  margin: 0;
 }
 
 .footer-nav {
@@ -46,6 +48,7 @@ export default {
   gap: 15px;
   flex-wrap: wrap;
   padding: 0;
+  margin: 0;
 }
 
 .footer-nav a {

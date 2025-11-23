@@ -32,6 +32,7 @@ export default {
 <style scoped>
 .main {
   padding-top: calc(30px + 2rem);
+  padding-bottom: var(--footer-height, 55px);
   position: relative;
 }
 

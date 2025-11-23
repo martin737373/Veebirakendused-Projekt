@@ -13,9 +13,7 @@
       class="post-image"
     />
     <div class="post-footer">
-      <button class="like-button" @click="likePost">
-        👍 {{ post.likes }}
-      </button>
+      <button class="like-button" @click="likePost">👍 {{ post.likes }}</button>
     </div>
   </article>
 </template>

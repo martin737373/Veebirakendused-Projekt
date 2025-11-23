@@ -12,6 +12,11 @@
       :alt="post.author"
       class="post-image"
     />
+    <div class="post-footer">
+      <button class="like-button" @click="likePost">
+        👍 {{ post.likes }}
+      </button>
+    </div>
   </article>
 </template>
 
@@ -22,6 +27,11 @@ export default {
     post: {
       type: Object,
       required: true,
+    },
+  },
+  methods: {
+    likePost() {
+      this.$store.dispatch("likePost", this.post.id);
     },
   },
 };
@@ -78,5 +88,24 @@ export default {
   color: #666;
   padding-left: 10px;
   border-left: 1px solid #ddd;
+}
+
+.post-footer {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.like-button {
+  background: none;
+  border: none;
+  font-size: 1em;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s ease;
+}
+
+.like-button:hover {
+  transform: scale(1.1);
 }
 </style>

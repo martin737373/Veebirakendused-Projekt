@@ -12,6 +12,7 @@ export default createStore({
         image:
           "https://www.treehugger.com/thmb/8prXW_VPkoaoGFuWVup1CdPwt3k=/750x0/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-604576095-235a5fa8df3c476dadba5290ab6c33e0.jpg",
         text: "Exploring the beauty of Sequoia National Park was an unforgettable experience. The trees make you feel both small and inspired.",
+        likes: 0,
       },
       {
         id: 2,
@@ -21,6 +22,7 @@ export default createStore({
           "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png",
         image: "",
         text: "Finally started my journey into web development! Excited to learn more about HTML, CSS, and JavaScript.",
+        likes: 0,
       },
       {
         id: 3,
@@ -29,7 +31,8 @@ export default createStore({
         avatar:
           "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png",
         image: "",
-        text: "Coffee, code, and creativity — that’s how my day goes when working on front-end design ideas.",
+        text: "Coffee, code, and creativity — that's how my day goes when working on front-end design ideas.",
+        likes: 0,
       },
       {
         id: 4,
@@ -39,6 +42,7 @@ export default createStore({
           "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png",
         image: "",
         text: "Hiking through nature helps me clear my mind and come up with better solutions for coding problems.",
+        likes: 0,
       },
       {
         id: 5,
@@ -48,6 +52,7 @@ export default createStore({
           "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png",
         image: "",
         text: "I love the challenge of transforming plain text into beautiful layouts with CSS.",
+        likes: 0,
       },
       {
         id: 6,
@@ -56,7 +61,8 @@ export default createStore({
         avatar:
           "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png",
         image: "",
-        text: "Started experimenting with responsive design today. It’s fun to make websites look great on any screen size!",
+        text: "Started experimenting with responsive design today. It's fun to make websites look great on any screen size!",
+        likes: 0,
       },
       {
         id: 7,
@@ -66,6 +72,7 @@ export default createStore({
           "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png",
         image: "",
         text: "Writing cleaner, more readable code is my main goal this semester.",
+        likes: 0,
       },
       {
         id: 8,
@@ -75,6 +82,7 @@ export default createStore({
           "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png",
         image: "",
         text: "Using Git and GitHub in a team project for the first time — version control is a lifesaver!",
+        likes: 0,
       },
       {
         id: 9,
@@ -84,6 +92,7 @@ export default createStore({
           "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png",
         image: "",
         text: "Testing different color schemes to make our website more visually appealing.",
+        likes: 0,
       },
       {
         id: 10,
@@ -93,6 +102,7 @@ export default createStore({
           "https://cdn.pixabay.com/photo/2023/02/18/11/00/icon-7797704_1280.png",
         image: "",
         text: "Finally got the layout looking just right! Next goal: make it interactive with JavaScript.",
+        likes: 0,
       },
     ],
   },
@@ -104,7 +114,18 @@ export default createStore({
       return state.posts.find((post) => post.id === id);
     },
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    likePost(state, postId) {
+      const post = state.posts.find((p) => p.id === postId);
+      if (post) {
+        post.likes++;
+      }
+    },
+  },
+  actions: {
+    likePost({ commit }, postId) {
+      commit("likePost", postId);
+    },
+  },
   modules: {},
 });

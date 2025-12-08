@@ -64,8 +64,6 @@ router.post('/signup', async (req, res) => {
         );
         console.log(authUser.rows[0].id);
         const token = await generateJWT(authUser.rows[0].id);
-        //res.cookie("isAuthorized", true, { maxAge: 1000 * 60, httpOnly: true });
-        //res.cookie('jwt', token, { maxAge: 6000000, httpOnly: true });
         res
             .status(201)
             .cookie('jwt', token, { maxAge: 6000000, httpOnly: true })
@@ -83,8 +81,10 @@ router.post('/login', async (req, res) => {
         const { email, password } = req.body;
         const user = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
         if (user.rows.length === 0) return res.status(401).json({ error: "User is not registered" });
+
         const validPassword = await bcrypt.compare(password, user.rows[0].password);
         if (!validPassword) return res.status(401).json({ error: "Incorrect password" });
+        
         const token = await generateJWT(user.rows[0].id);
         res
             .status(201)

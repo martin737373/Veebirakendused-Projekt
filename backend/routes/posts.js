@@ -3,11 +3,11 @@ const router = express.Router();
 const { pool } = require('../database');
 const { isAuthenticated } = require('./auth');
 
+// GET ALL POSTS
 router.get('/', isAuthenticated, async (req, res) => {
     try {
-        // GET ALL POSTS
         const result = await pool.query(
-            "SELECT id, body, date FROM posts ORDER BY date DESC"
+            `SELECT id, body, urllink, post_date FROM posttable ORDER BY post_date DESC`
         );
         res.json(result.rows);
     } catch (err) {
@@ -16,58 +16,66 @@ router.get('/', isAuthenticated, async (req, res) => {
     }
 });
 
+// GET ONE POST
 router.get('/:id', isAuthenticated, async (req, res) => {
     try {
         const { id } = req.params;
-        // GET ONE POST
         const result = await pool.query(
-            "SELECT id, body, date FROM posts WHERE id = $1",
-            [id]
+            `SELECT * FROM posttable WHERE id = $1`, [id]
         );
-        res.json(result.rows);
+
+        res.json(result.rows[0]);
     } catch (err) {
         console.error(err.message);
         res.status(500).json({ error: err.message });
     }
 });
 
+// CREATE POST
 router.post('/', isAuthenticated, async (req, res) => {
     try {
-        const { body } = req.body;
-        const userId = req.user.id;
-        // CREATE NEW POST
+        const { body, urllink } = req.body;
+
         const result = await pool.query(
-            "INSERT INTO posts(body, user_id) VALUES ($1, $2) RETURNING id, body, date",
-            [body, userId]
+            `INSERT INTO posttable(body, urllink, post_date) values ($1, $2, $3) RETURNING*`,
+            [body, urllink, new Date()]
         );
-        res.json(result.rows);
+
+        res.json(result.rows[0]);
     } catch (err) {
         console.error(err.message);
         res.status(500).json({ error: err.message });
     }
 });
 
+// UPDATE POST
 router.put('/:id', isAuthenticated, async (req, res) => {
     try {
         const { id } = req.params;
-        const { body } = req.body;
-        // UPDATE POST
+        const { body, urllink } = req.body;
+
         const result = await pool.query(
-            "UPDATE posts SET body = $1 WHERE id = $2 RETURNING id, body, date",
-            [body, id]
+            `UPDATE posttable SET (body, urllink, post_date) = ($2, $3, $4) WHERE id = $1`,
+            [id, body, urllink, new Date()]
         );
-        res.json(result.rows);
+
+        res.json(result.rows[0]);
     } catch (err) {
         console.error(err.message);
         res.status(500).json({ error: err.message });
     }
 });
 
+// DELETE ONE POST
 router.delete('/:id', isAuthenticated, async (req, res) => {
     try {
         const { id } = req.params;
-        // DELETE POST
-        const result = await pool.query("DELETE FROM posts WHERE id = $1", [id]);
+
+        const result = await pool.query(
+            `DELETE FROM posttable WHERE id = $1`,
+            [id]
+        );
+
         res.json(result);
     } catch (err) {
         console.error(err.message);
@@ -75,10 +83,10 @@ router.delete('/:id', isAuthenticated, async (req, res) => {
     }
 });
 
+// DELETE ALL POSTS
 router.delete('/', isAuthenticated, async (req, res) => {
     try {
-        // DELETE ALL
-        const result = await pool.query("DELETE FROM posts");
+        const result = await pool.query("TRUNCATE posttable");
         res.json(result);
     } catch (err) {
         console.error(err.message);
@@ -87,4 +95,3 @@ router.delete('/', isAuthenticated, async (req, res) => {
 });
 
 module.exports = router;
-

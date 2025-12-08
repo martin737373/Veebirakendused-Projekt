@@ -15,14 +15,13 @@ const execute = async (query) => {
         await pool.query(query);
         return true;
     } catch (error) {
-        console.error("Query failed:", query);
-        console.error(error);
-        throw error;
+        console.error(error.stack);
+        return false;
     }
 };
 
 const createUsersTable = `
-      CREATE TABLE IF NOT EXISTS users (
+      CREATE TABLE IF NOT EXISTS "users" (
         id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
         email VARCHAR(200) UNIQUE NOT NULL,
         password VARCHAR(200) NOT NULL
@@ -30,23 +29,17 @@ const createUsersTable = `
       `;
 
 const createPostsTable = `
-      CREATE TABLE IF NOT EXISTS posts (
-        id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-        body TEXT NOT NULL,
-        date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        user_id uuid REFERENCES users(id) ON DELETE CASCADE
-      );
-      `;
+      CREATE TABLE IF NOT EXISTS "posttable" (
+	    "id" SERIAL PRIMARY KEY,         
+	    "body" VARCHAR(200) NOT NULL,
+        "urllink" TEXT,
+        "post_date" DATE NOT NULL
+    );
+    `;
 
-const createPgcryptoExtension = `
-        CREATE EXTENSION IF NOT EXISTS "pgcrypto";
-        `;
 
 const initDB = async () => {
     try {
-        await execute(createPgcryptoExtension);
-        console.log('Extension created');
-
         await execute(createUsersTable);
         console.log('Table "users" is created');
 

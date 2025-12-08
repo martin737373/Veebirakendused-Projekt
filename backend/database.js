@@ -1,6 +1,7 @@
 // database.js
 require('dotenv').config();
 const Pool = require('pg').Pool;
+
 const pool = new Pool({
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
@@ -11,47 +12,51 @@ const pool = new Pool({
 
 const execute = async (query) => {
     try {
-        await pool.connect(); // gets connection
-        await pool.query(query); // sends queries
+        await pool.query(query);
         return true;
     } catch (error) {
-        console.error(error.stack);
-        return false;
+        console.error("Query failed:", query);
+        console.error(error);
+        throw error;
     }
 };
 
-
-/*
-const createTblQuery = `
-    CREATE TABLE IF NOT EXISTS "posttable" (
-        "id" SERIAL PRIMARY KEY,         
-        "title" VARCHAR(200) NOT NULL,
-        "body" VARCHAR(200) NOT NULL,
-        "urllink" VARCHAR(200)  
-    );`;
-
-// A function to execute the previous query   
-execute(createTblQuery).then(result => {
-    if (result) {
-        console.log('If does not exists, create the "posttable" table');
-    }
-});
-
-gen_random_uuid() A system function to generate a random Universally Unique IDentifier (UUID)
-An example of generated uuid:  32165102-4866-4d2d-b90c-7a2fddbb6bc8
-
-const createTblQuery = `
-    CREATE TABLE IF NOT EXISTS "users" (
+const createUsersTable = `
+      CREATE TABLE IF NOT EXISTS users (
         id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
-        email VARCHAR(200) NOT NULL UNIQUE,
-        password VARCHAR(200) NOT NULL 
-    );`;
+        email VARCHAR(200) UNIQUE NOT NULL,
+        password VARCHAR(200) NOT NULL
+      );
+      `;
 
-execute(createTblQuery).then(result => {
-    if (result) {
+const createPostsTable = `
+      CREATE TABLE IF NOT EXISTS posts (
+        id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+        body TEXT NOT NULL,
+        date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        user_id uuid REFERENCES users(id) ON DELETE CASCADE
+      );
+      `;
+
+const createPgcryptoExtension = `
+        CREATE EXTENSION IF NOT EXISTS "pgcrypto";
+        `;
+
+const initDB = async () => {
+    try {
+        await execute(createPgcryptoExtension);
+        console.log('Extension created');
+
+        await execute(createUsersTable);
         console.log('Table "users" is created');
-    }
-});
-*/
 
-module.exports = pool;
+        await execute(createPostsTable);
+        console.log('Table "posts" is created');
+    } catch (err) {
+        console.error("DB init error:", err);
+    }
+};
+
+initDB();
+
+module.exports = { pool };

@@ -88,10 +88,9 @@ export default {
         return;
       }
 
-      this.SignUp();
-
       // All rules passed
       this.errorMessage = false;
+      this.SignUp();
     },
 
     SignUp() {

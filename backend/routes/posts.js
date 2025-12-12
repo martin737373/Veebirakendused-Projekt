@@ -7,7 +7,7 @@ const { isAuthenticated } = require('./auth');
 router.get('/', isAuthenticated, async (req, res) => {
     try {
         const result = await pool.query(
-            `SELECT id, body, urllink, post_date FROM posttable ORDER BY post_date DESC`
+            `SELECT id, body, urllink, post_date FROM post_table ORDER BY post_date DESC`
         );
         res.json(result.rows);
     } catch (err) {
@@ -21,7 +21,7 @@ router.get('/:id', isAuthenticated, async (req, res) => {
     try {
         const { id } = req.params;
         const result = await pool.query(
-            `SELECT * FROM posttable WHERE id = $1`, [id]
+            `SELECT * FROM post_table WHERE id = $1`, [id]
         );
 
         res.json(result.rows[0]);
@@ -37,7 +37,7 @@ router.post('/', isAuthenticated, async (req, res) => {
         const { body, urllink } = req.body;
 
         const result = await pool.query(
-            `INSERT INTO posttable(body, urllink, post_date) values ($1, $2, $3) RETURNING*`,
+            `INSERT INTO post_table(body, urllink, post_date) values ($1, $2, $3) RETURNING*`,
             [body, urllink, new Date()]
         );
 
@@ -55,7 +55,7 @@ router.put('/:id', isAuthenticated, async (req, res) => {
         const { body, urllink } = req.body;
 
         const result = await pool.query(
-            `UPDATE posttable SET (body, urllink, post_date) = ($2, $3, $4) WHERE id = $1`,
+            `UPDATE post_table SET (body, urllink, post_date) = ($2, $3, $4) WHERE id = $1`,
             [id, body, urllink, new Date()]
         );
 
@@ -72,7 +72,7 @@ router.delete('/:id', isAuthenticated, async (req, res) => {
         const { id } = req.params;
 
         const result = await pool.query(
-            `DELETE FROM posttable WHERE id = $1`,
+            `DELETE FROM post_table WHERE id = $1`,
             [id]
         );
 
@@ -86,7 +86,7 @@ router.delete('/:id', isAuthenticated, async (req, res) => {
 // DELETE ALL POSTS
 router.delete('/', isAuthenticated, async (req, res) => {
     try {
-        const result = await pool.query("TRUNCATE posttable");
+        const result = await pool.query("TRUNCATE post_table");
         res.json(result);
     } catch (err) {
         console.error(err.message);

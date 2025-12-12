@@ -22,16 +22,18 @@ const execute = async (query) => {
 
 const createUsersTable = `
       CREATE TABLE IF NOT EXISTS "users" (
-        id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
+        id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
         email VARCHAR(200) UNIQUE NOT NULL,
         password VARCHAR(200) NOT NULL
       );
+
+      CREATE UNIQUE INDEX IF NOT EXISTS users_email_case_insensitive_idx ON users (LOWER(email));
       `;
 
 const createPostsTable = `
-      CREATE TABLE IF NOT EXISTS "posttable" (
+      CREATE TABLE IF NOT EXISTS "post_table" (
 	    "id" SERIAL PRIMARY KEY,         
-	    "body" VARCHAR(200) NOT NULL,
+	    "body" TEXT NOT NULL,
         "urllink" TEXT,
         "post_date" DATE NOT NULL
     );
@@ -40,11 +42,17 @@ const createPostsTable = `
 
 const initDB = async () => {
     try {
-        await execute(createUsersTable);
-        console.log('Table "users" is created');
+        if (await execute(createUsersTable)) {
+            console.log('Table "users" is created');
+        } else {
+            console.error('Failed to create "users" table');
+        }
 
-        await execute(createPostsTable);
-        console.log('Table "posts" is created');
+        if (await execute(createPostsTable)) {
+            console.log('Table "posts" is created');
+        } else {
+            console.error('Failed to create "posts" table');
+        }
     } catch (err) {
         console.error("DB init error:", err);
     }

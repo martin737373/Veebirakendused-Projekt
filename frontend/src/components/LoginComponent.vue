@@ -1,8 +1,8 @@
 <template>
-  <div class="signup-container">
-    <h2>Create an Account</h2>
+  <div class="login-container">
+    <h2>Log In</h2>
 
-    <form @submit.prevent="handleSubmit" class="signup-form">
+    <form @submit.prevent="handleSubmit" class="login-form">
       <!-- EMAIL -->
       <label>Email:</label>
       <input
@@ -21,85 +21,55 @@
         placeholder="Enter your password"
       />
 
-      <!-- ERROR MESSAGE -->
-      <p v-if="errorMessage" class="error-message">
-        <strong>Password is not valid:</strong>
-        <br />
-        <span v-for="(err, index) in failedRules" :key="index">
-          - {{ err }}<br />
-        </span>
-      </p>
+      <!-- LOG IN -->
+      <button type="submit" class="login-button">Log In</button>
 
-      <!-- SUBMIT -->
-      <button type="submit" class="signup-button">Sign Up</button>
+      <p class="separator">OR</p>
+
+      <!-- SIGN UP -->
+      <button type="button" @click="this.$router.push('/signup')" class="signup-button">Sign Up</button>
     </form>
   </div>
 </template>
 
 <script>
 export default {
-  name: "SignupComponent",
+  name: "LoginComponent",
   data() {
     return {
       email: "",
       password: "",
-      errorMessage: false,
-      failedRules: [],
     };
   },
   methods: {
     handleSubmit() {
-      this.failedRules = [];
-
       const pw = this.password;
 
       // 1. Length
-      if (pw.length < 8 || pw.length > 14) {
-        this.failedRules.push("Must be 8–14 characters long");
-      }
+      if (pw.length < 8 || pw.length > 14) { alert("Login failed!"); return; }
 
       // 2. Starts with uppercase
-      if (!/^[A-Z]/.test(pw)) {
-        this.failedRules.push("Must start with an uppercase letter");
-      }
+      if (!/^[A-Z]/.test(pw)) { alert("Login failed!"); return; }
 
-      // 3. At least one uppercase
-      if (!/[A-Z]/.test(pw)) {
-        this.failedRules.push("Must contain at least one uppercase letter");
-      }
+      // 3. At least two lowercase
+      if ((pw.match(/[a-z]/g) || []).length < 2) { alert("Login failed!"); return; }
 
-      // 4. At least two lowercase
-      if ((pw.match(/[a-z]/g) || []).length < 2) {
-        this.failedRules.push("Must contain at least two lowercase letters");
-      }
+      // 4. At least one number
+      if (!/\d/.test(pw)) { alert("Login failed!"); return; }
 
-      // 5. At least one number
-      if (!/\d/.test(pw)) {
-        this.failedRules.push("Must contain at least one number");
-      }
+      // 5. Contains underscore
+      if (!pw.includes("_")) { alert("Login failed!"); return; }
 
-      // 6. Contains underscore
-      if (!pw.includes("_")) {
-        this.failedRules.push('Must include the character "_"');
-      }
-
-      if (this.failedRules.length > 0) {
-        this.errorMessage = true;
-        return;
-      }
-
-      this.SignUp();
-
-      // All rules passed
-      this.errorMessage = false;
+      // Only attempt login if all rules are passed
+      this.LogIn();
     },
 
-    SignUp() {
+    LogIn() {
       var data = {
         email: this.email,
         password: this.password,
       };
-      fetch("http://localhost:3000/auth/signup", {
+      fetch("http://localhost:3000/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -111,7 +81,7 @@ export default {
         .then((data) => {
           console.log(data);
           if (data.error) {
-            alert("Signup failed!: " + data.error);
+            alert("Login failed!: " + data.error);
             return;
           }
           this.$router.push("/");
@@ -126,7 +96,7 @@ export default {
 </script>
 
 <style scoped>
-.signup-container {
+.login-container {
   max-width: 400px;
   margin: 2rem auto;
   padding: 1.5rem;
@@ -137,7 +107,7 @@ export default {
   color: white;
 }
 
-.signup-form {
+.login-form {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -150,6 +120,7 @@ input {
   font-size: 1rem;
 }
 
+.login-button,
 .signup-button {
   padding: 0.7rem;
   font-size: 1.1rem;
@@ -162,6 +133,7 @@ input {
   transition: 0.3s;
 }
 
+.login-button:hover,
 .signup-button:hover {
   background: #f0d3a5;
 }
@@ -172,5 +144,10 @@ input {
   color: #ffb3b3;
   font-size: 0.9rem;
   text-align: left;
+}
+
+.separator {
+  margin: 0;
+  font-size: 0.9rem;
 }
 </style>

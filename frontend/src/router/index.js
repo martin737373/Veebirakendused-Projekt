@@ -1,7 +1,9 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import auth from "@/auth";
 
-const MainView = () => import("@views/MainView.vue");
-const SignupView = () => import("@views/SignupView.vue");
+const MainView = () => import("@views/Main.vue");
+const SignupView = () => import("@views/Signup.vue");
+const LoginView = () => import("@views/Login.vue");
 
 const routes = [
   {
@@ -14,11 +16,33 @@ const routes = [
     name: "signup",
     component: SignupView,
   },
+  {
+    path: "/login",
+    name: "logIn",
+    component: LoginView,
+  },
 ];
 
 const router = createRouter({
   history: createWebHashHistory(),
   routes,
+});
+
+router.beforeEach(async (to, from, next) => {
+  const publicPaths = ["/signup", "/login"];
+  const isPublic = publicPaths.includes(to.path);
+  if (isPublic) {
+    next();
+    return;
+  }
+
+  const authResult = await auth.authenticated();
+  if (!authResult) {
+    next("/login");
+    return;
+  }
+
+  next();
 });
 
 export default router;

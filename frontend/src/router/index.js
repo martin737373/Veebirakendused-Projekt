@@ -4,6 +4,7 @@ import auth from "@/auth";
 const MainView = () => import("@views/Main.vue");
 const SignupView = () => import("@views/Signup.vue");
 const LoginView = () => import("@views/Login.vue");
+const CreatePostView = () => import("@views/CreatePost.vue");
 
 const routes = [
   {
@@ -21,6 +22,11 @@ const routes = [
     name: "logIn",
     component: LoginView,
   },
+  {
+    path: "/createpost",
+    name: "createpost",
+    component: CreatePostView,
+  }
 ];
 
 const router = createRouter({

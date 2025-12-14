@@ -30,9 +30,9 @@ export default {
     },
   },
   methods: {
-    likePost() {
-      this.$store.dispatch("likePost", this.post.id);
-    },
+    // likePost() {
+    //   this.$store.dispatch("likePost", this.post.id);
+    // },
   },
 };
 </script>

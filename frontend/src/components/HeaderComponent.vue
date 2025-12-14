@@ -44,6 +44,23 @@ export default {
 </script>
 
 <style scoped>
+.logout-button {
+  padding: 0.6rem 1rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  color: white;
+  background: transparent;
+  transition: 0.3s;
+  margin-left: 1rem;
+}
+
+.logout-button:hover {
+  background-color: #ff4c4c;
+}
+
 .header-container {
   align-items: center;
   background-color: rgba(30, 40, 60, 0.5);

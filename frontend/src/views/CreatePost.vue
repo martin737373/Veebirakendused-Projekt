@@ -16,10 +16,10 @@ export default {
 </script>
 
 <style scoped>
-    #post-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 2rem;
-    }
+#post-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
 </style>

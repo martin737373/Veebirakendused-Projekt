@@ -26,7 +26,7 @@ const routes = [
     path: "/create-post",
     name: "create-post",
     component: CreatePostView,
-  }
+  },
 ];
 
 const router = createRouter({

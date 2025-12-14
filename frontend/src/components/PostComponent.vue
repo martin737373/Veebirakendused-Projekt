@@ -1,7 +1,12 @@
 <template>
   <article class="post">
     <div class="post-header">
-      <img v-if="post.avatar" :src="post.avatar" :alt="post.author" class="post-avatar" />
+      <img
+        v-if="post.avatar"
+        :src="post.avatar"
+        :alt="post.author"
+        class="post-avatar"
+      />
       <h3 class="post-author">{{ post.author }}</h3>
       <span class="post-date">{{ post.date }}</span>
     </div>

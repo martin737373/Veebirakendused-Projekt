@@ -4,10 +4,14 @@
       <PostComponent v-for="post in posts" :key="post.id" :post="post" />
     </div>
     <ul class="post-buttons">
-      <li><router-link to="/create-post">
-        <button id="create-post-button">Create Post</button>
-      </router-link></li>
-      <li><button id="delete-posts-button" @click="deleteAll">Delete All</button></li>
+      <li>
+        <router-link to="/create-post">
+          <button id="create-post-button">Create Post</button>
+        </router-link>
+      </li>
+      <li>
+        <button id="delete-posts-button" @click="deleteAll">Delete All</button>
+      </li>
     </ul>
   </div>
 </template>
@@ -22,7 +26,7 @@ export default {
   },
   data() {
     return {
-      posts: [],          // will hold the fetched posts
+      posts: [], // will hold the fetched posts
     };
   },
 
@@ -34,13 +38,13 @@ export default {
     async fetchPosts() {
       try {
         const response = await fetch("http://localhost:3000/posts/", {
-        method: "GET",
-        credentials: "include",
-      });
+          method: "GET",
+          credentials: "include",
+        });
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const data = await response.json();
 
-        console.log(data)
+        console.log(data);
         // Map the DB fields to the shape expected by PostComponent
         this.posts = data.map((p) => ({
           id: p.id,

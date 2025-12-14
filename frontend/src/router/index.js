@@ -23,8 +23,8 @@ const routes = [
     component: LoginView,
   },
   {
-    path: "/createpost",
-    name: "createpost",
+    path: "/create-post",
+    name: "create-post",
     component: CreatePostView,
   }
 ];

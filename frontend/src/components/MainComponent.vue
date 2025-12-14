@@ -3,6 +3,12 @@
     <div id="posts">
       <PostComponent v-for="post in posts" :key="post.id" :post="post" />
     </div>
+    <ul class="post-buttons">
+      <li><router-link to="/create-post">
+        <button id="create-post-button">Create Post</button>
+      </router-link></li>
+      <li><button id="delete-posts-button" @click="deleteAll">Delete All</button></li>
+    </ul>
   </div>
 </template>
 
@@ -47,6 +53,20 @@ export default {
         console.log(this.posts);
       } catch (err) {
         console.error("Failed to load posts:", err);
+      }
+    },
+
+    async deleteAll() {
+      try {
+        const response = await fetch("http://localhost:3000/posts/", {
+          method: "DELETE",
+          credentials: "include",
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        console.log("All posts deleted");
+        this.posts = [];
+      } catch (err) {
+        console.error("Failed to delete posts:", err);
       }
     },
   },

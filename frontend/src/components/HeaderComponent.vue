@@ -2,7 +2,6 @@
   <header class="header-container">
     <ul class="nav">
       <li v-if="!isAuthRoute"><router-link to="/">Home</router-link></li>
-      <li v-if="!isAuthRoute"><router-link to="/createpost">Create Post</router-link></li>
       <li v-if="isAuthRoute"><router-link to="/login">Login</router-link></li>
       <li v-if="isAuthRoute">
         <router-link to="/signup">Sign Up</router-link>

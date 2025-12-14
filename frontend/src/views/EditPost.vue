@@ -1,6 +1,6 @@
 <template>
   <div id="post-container">
-    <EditPostComponent />
+    <EditPostComponent :id="$route.params.id" />
   </div>
 </template>
 

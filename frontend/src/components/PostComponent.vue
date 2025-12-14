@@ -1,27 +1,29 @@
 <template>
   <article class="post">
-    <div class="post-header">
+    <router-link :to="`/edit/${post.id}`">
+      <div class="post-header">
+        <img
+          v-if="post.avatar"
+          :src="post.avatar"
+          :alt="post.author"
+          class="post-avatar"
+        />
+        <h3 class="post-author">{{ post.author }}</h3>
+        <span class="post-date">{{ post.date }}</span>
+      </div>
+      <p class="post-text">{{ post.text }}</p>
       <img
-        v-if="post.avatar"
-        :src="post.avatar"
+        v-if="post.image"
+        :src="post.image"
         :alt="post.author"
-        class="post-avatar"
+        class="post-image"
       />
-      <h3 class="post-author">{{ post.author }}</h3>
-      <span class="post-date">{{ post.date }}</span>
-    </div>
-    <p class="post-text">{{ post.text }}</p>
-    <img
-      v-if="post.image"
-      :src="post.image"
-      :alt="post.author"
-      class="post-image"
-    />
-    <!--
-    <div class="post-footer">
-      <button class="like-button" @click="likePost">👍 {{ post.likes }}</button>
-    </div>
-    -->
+      <!--
+      <div class="post-footer">
+        <button class="like-button" @click="likePost">👍 {{ post.likes }}</button>
+      </div>
+      -->
+    </router-link>
   </article>
 </template>
 

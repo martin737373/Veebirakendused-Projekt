@@ -1,6 +1,6 @@
 <template>
   <div id="form-box">
-    <form id="post-form" @submit.prevent="createPost">
+    <form id="post-form" @submit.prevent="updatePost">
       <div class="form-fields">
         <div>
           <label>Post body</label>
@@ -23,7 +23,7 @@
           />
         </div>
         <div>
-          <button type="submit">Create post</button>
+          <button type="submit">Update post</button>
         </div>
       </div>
     </form>
@@ -32,20 +32,50 @@
 
 <script>
 export default {
-  name: "CreatePostComponent",
+  name: "EditPostComponent",
+  props: {
+    id: {
+      type: Number,
+      required: true,
+    },
+  },
+
   data() {
     return {
       body: "",
       url: "",
     };
   },
+
+  setup() {
+    this.fetchPostData();
+  },
+
   methods: {
-    createPost() {
+    async fetchPostData() {
+      try {
+        const response = await fetch(`http://localhost:3000/posts/${this.id}`,
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+        this.body = data.body;
+        this.url = data.urllink;
+      } catch (err) {
+        console.error("Failed to load post data:", err);
+      }
+    },
+
+    async updatePost() {
       const newPost = {
         body: this.body,
         urllink: this.url,
       };
-      fetch("http://localhost:3000/posts/", {
+      fetch(`http://localhost:3000/posts/${this.post_id}`,
+      {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

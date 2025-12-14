@@ -5,6 +5,7 @@ const MainView = () => import("@views/Main.vue");
 const SignupView = () => import("@views/Signup.vue");
 const LoginView = () => import("@views/Login.vue");
 const CreatePostView = () => import("@views/CreatePost.vue");
+const EditPostView = () => import("@views/EditPost.vue");
 
 const routes = [
   {
@@ -26,6 +27,12 @@ const routes = [
     path: "/create-post",
     name: "create-post",
     component: CreatePostView,
+  },
+  {
+    path: "/edit/:id",
+    name: "edit-post",
+    component: EditPostView,
+    props: true,
   },
 ];
 

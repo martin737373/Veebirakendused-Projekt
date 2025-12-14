@@ -3,9 +3,13 @@
     <ul class="nav">
       <li><router-link to="/">Home</router-link></li>
       <li v-if="isAuthRoute"><router-link to="/login">Login</router-link></li>
-      <li v-if="isAuthRoute"><router-link to="/signup">Sign Up</router-link></li>
+      <li v-if="isAuthRoute">
+        <router-link to="/signup">Sign Up</router-link>
+      </li>
     </ul>
-    <button v-if="!isAuthRoute" @click="LogOut" class="logout-button">Log Out</button>
+    <button v-if="!isAuthRoute" @click="LogOut" class="logout-button">
+      Log Out
+    </button>
   </header>
 </template>
 
@@ -16,23 +20,25 @@ import { useRoute } from "vue-router";
 export default {
   setup() {
     const route = useRoute();
-    const isAuthRoute = computed(() => ["/login", "/signup"].includes(route.path));
+    const isAuthRoute = computed(() =>
+      ["/login", "/signup"].includes(route.path)
+    );
     return { isAuthRoute };
   },
   methods: {
     LogOut() {
-    fetch("http://localhost:3000/auth/logout", {
-      method: "GET",
-      credentials: "include",
-    })
-      .then(() => {
-        this.$router.push("/login");
+      fetch("http://localhost:3000/auth/logout", {
+        method: "GET",
+        credentials: "include",
       })
-      .catch((e) => {
-        console.log(e);
-        console.log("error logout");
-      });
-  },
+        .then(() => {
+          this.$router.push("/login");
+        })
+        .catch((e) => {
+          console.log(e);
+          console.log("error logout");
+        });
+    },
   },
 };
 </script>

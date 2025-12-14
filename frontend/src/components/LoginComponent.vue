@@ -27,7 +27,13 @@
       <p class="separator">OR</p>
 
       <!-- SIGN UP -->
-      <button type="button" @click="this.$router.push('/signup')" class="signup-button">Sign Up</button>
+      <button
+        type="button"
+        @click="this.$router.push('/signup')"
+        class="signup-button"
+      >
+        Create account
+      </button>
     </form>
   </div>
 </template>
@@ -46,19 +52,34 @@ export default {
       const pw = this.password;
 
       // 1. Length
-      if (pw.length < 8 || pw.length > 14) { alert("Login failed!"); return; }
+      if (pw.length < 8 || pw.length > 14) {
+        alert("Login failed!");
+        return;
+      }
 
       // 2. Starts with uppercase
-      if (!/^[A-Z]/.test(pw)) { alert("Login failed!"); return; }
+      if (!/^[A-Z]/.test(pw)) {
+        alert("Login failed!");
+        return;
+      }
 
       // 3. At least two lowercase
-      if ((pw.match(/[a-z]/g) || []).length < 2) { alert("Login failed!"); return; }
+      if ((pw.match(/[a-z]/g) || []).length < 2) {
+        alert("Login failed!");
+        return;
+      }
 
       // 4. At least one number
-      if (!/\d/.test(pw)) { alert("Login failed!"); return; }
+      if (!/\d/.test(pw)) {
+        alert("Login failed!");
+        return;
+      }
 
       // 5. Contains underscore
-      if (!pw.includes("_")) { alert("Login failed!"); return; }
+      if (!pw.includes("_")) {
+        alert("Login failed!");
+        return;
+      }
 
       // Only attempt login if all rules are passed
       this.LogIn();

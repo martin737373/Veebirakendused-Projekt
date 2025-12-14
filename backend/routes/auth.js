@@ -26,7 +26,7 @@ const isAuthenticated = async (req, res, next) => {
 };
 
 router.get('/authenticate', async (req, res) => {
-    console.log('authentication request has been arrived');
+    console.log('authentication request has arrived');
     const token = req.cookies.jwt;
     let authenticated = false;
     try {

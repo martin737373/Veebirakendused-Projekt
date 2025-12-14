@@ -34,9 +34,6 @@ export default {
         body: this.body,
         urllink: this.url,
       };
-
-      console.log(newPost);
-
       fetch("http://localhost:3000/posts/", {
         method: "POST",
         headers: {
@@ -48,7 +45,7 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          //this.$router.push("/");
+          this.$router.push("/");
         })
         .catch((e) => {
           console.log(e);

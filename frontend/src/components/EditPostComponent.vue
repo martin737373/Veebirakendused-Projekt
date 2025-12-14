@@ -13,13 +13,18 @@
       </div>
       <div class="form-group">
         <label>Paste URL:</label>
-        <input
-          v-model="url"
-          type="text"
-          placeholder="Image URL"
-        />
+        <input v-model="url" type="text" placeholder="Image URL" />
       </div>
-      <button type="submit" class="update-button">Update Post</button>
+      <ul class="post-buttons">
+        <li>
+          <button type="submit" class="action-button update-button">Update Post</button>
+        </li>
+        <li>
+          <button @click="deletePost" type="button" class="action-button delete-button">
+            Delete
+          </button>
+        </li>
+      </ul>
     </form>
   </div>
 </template>
@@ -34,15 +39,15 @@ export default {
     },
   },
   data() {
-  return {
-    body: "",
-    url: "",
-    postId: Number(this.id), // local copy of the prop
-  };
-},
-created() {
-  this.fetchPostData();
-},
+    return {
+      body: "",
+      url: "",
+      postId: Number(this.id), // local copy of the prop
+    };
+  },
+  created() {
+    this.fetchPostData();
+  },
   methods: {
     async fetchPostData() {
       try {
@@ -59,44 +64,61 @@ created() {
       }
     },
 
-    async updatePost() {
-  const updatedPost = {
-    body: this.body,
-    urllink: this.url,
-  };
-
-  try {
-    const response = await fetch(`http://localhost:3000/posts/${this.id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      credentials: "include",
-      body: JSON.stringify(updatedPost),
-    });
-
-    if (!response.ok) {
-      // Try to parse JSON, but fallback if empty
-      let errorMessage = `HTTP ${response.status}`;
+    async deletePost() {
       try {
-        const errorData = await response.json();
-        errorMessage = errorData.message || errorMessage;
-      } catch {}
-      throw new Error(errorMessage);
-    }
+        const response = await fetch(`http://localhost:3000/posts/${this.id}`, {
+          method: "DELETE",
+          credentials: "include",
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        console.log("Post deleted");
+        this.$router.push("/");
+      } catch (err) {
+        console.error("Failed to delete post:", err);
+        alert("Failed to delete post: " + err.message);
+      }
+    },
 
-    // Safe parsing: only parse if content exists
-    let data = null;
-    const text = await response.text();
-    if (text) {
-      data = JSON.parse(text);
-    }
+    async updatePost() {
+      const updatedPost = {
+        body: this.body,
+        urllink: this.url,
+      };
 
-    console.log("Post updated:", data);
-    this.$router.push("/"); // redirect after update
-  } catch (err) {
-    console.error("Failed to update post:", err);
-    alert("Failed to update post: " + err.message);
-  }
-},
+      try {
+        const response = await fetch(`http://localhost:3000/posts/${this.id}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+          body: JSON.stringify(updatedPost),
+        });
+
+        if (!response.ok) {
+          // Try to parse JSON, but fallback if empty
+          let errorMessage = `HTTP ${response.status}`;
+          try {
+            const errorData = await response.json();
+            errorMessage = errorData.message || errorMessage;
+          } catch (e) {
+            throw new Error(errorMessage);
+          }
+          throw new Error(errorMessage);
+        }
+
+        // Safe parsing: only parse if content exists
+        let data = null;
+        const text = await response.text();
+        if (text) {
+          data = JSON.parse(text);
+        }
+
+        console.log("Post updated:", data);
+        this.$router.push("/"); // redirect after update
+      } catch (err) {
+        console.error("Failed to update post:", err);
+        alert("Failed to update post: " + err.message);
+      }
+    },
   },
 };
 </script>
@@ -161,5 +183,33 @@ textarea {
 
 .update-button:hover {
   background: #f0d3a5;
+}
+
+.post-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  list-style: none;
+  padding: 0;
+}
+
+.delete-button {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+.delete-button:hover {
+  background-color: #ff4c4c;
+}
+
+.action-button {
+  padding: 0.7rem 1.2rem;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: 0.3s;
 }
 </style>

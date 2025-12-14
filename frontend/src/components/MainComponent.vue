@@ -11,7 +11,9 @@
         </router-link>
       </li>
       <li>
-        <button class="action-button delete-button" @click="deleteAll">Delete All</button>
+        <button class="action-button delete-button" @click="deleteAll">
+          Delete All
+        </button>
       </li>
     </ul>
   </div>
@@ -73,7 +75,6 @@ export default {
 </script>
 
 <style scoped>
-
 .main-container {
   max-width: 700px;
   margin: 100px auto 2rem auto;
